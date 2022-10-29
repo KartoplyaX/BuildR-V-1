@@ -197,29 +197,29 @@ namespace BuildR_V_1.Pages
         }
 
         public IActionResult OnPostCharge(
-            string stripeEmail,
-            string stripeToken,
-            long amount
-            )
-        {
-            var customers = new CustomerService();
-            var charges = new ChargeService();
+             string stripeEmail,
+             string stripeToken,
+             long amount
+             )
+         {
+             var customers = new CustomerService();
+             var charges = new ChargeService();
 
-            var customer = customers.Create(new CustomerCreateOptions
-            {
-                Email = stripeEmail,
-                Source = stripeToken
-            });
-            var charge = charges.Create(new ChargeCreateOptions
-            {
-                Amount = amount,
+             var customer = customers.Create(new CustomerCreateOptions
+             {
+                 Email = stripeEmail,
+                 Source = stripeToken
+             });
+             var charge = charges.Create(new ChargeCreateOptions
+             {
+                 Amount = amount,
                 Description = "Money Transaction",
-                Currency = "gbp",
-                Customer = customer.Id
-            });
-            Process().Wait();
-            return
-                RedirectToPage("/TransactionSuccess");
+                 Currency = "gbp",
+                 Customer = customer.Id
+             });
+             Process().Wait();
+             return
+                 RedirectToPage("/TransactionSuccess");
         }
     }
 }
