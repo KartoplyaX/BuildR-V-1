@@ -1,0 +1,24 @@
+﻿@page
+@model BuildR_V_1.Pages.IndexModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "/Pages/_Layout.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Identity
+@using BuildR_V_1.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+<h1>Index</h1>
+
+
+@if (SignInManager.IsSignedIn(User))
+{ 
+    <h2>Hello @UserManager.GetUserName(User)</h2>
+    if (User.IsInRole("Admin"))
+    {
+        <h2>Only Admin Users can see this!</h2>
+    }
+}

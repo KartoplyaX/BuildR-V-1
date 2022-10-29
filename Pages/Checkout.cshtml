@@ -1,0 +1,75 @@
+﻿@page
+@model BuildR_V_1.Pages.CheckoutModel
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+@using BuildR_V_1.Data
+@using Microsoft.Extensions.Options
+@*@inject IOptions<StripeSettings> Stripe
+*@
+<div class="title-container">
+    <h2 class="title-page">Checkout</h2>
+</div>
+
+<form class="content-table-form" method="post">
+    <div class="content-table-div">
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th></th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    var subtotal = item.Money * item.Quantity;
+                    <tr>
+                        <td>@item.Name</td>
+
+
+                        <td>@item.Money.ToString("C")</td>
+
+
+                        <td>
+                            <button id="submit-button" type="submit" asp-page-handler="Reduce" asp-route-itemID="@item.ID">-</button>
+                            <button id="submit-button" type="submit" asp-page-handler="Add" asp-route-itemID="@item.ID">+</button>
+                            <button id="submit-button" type="submit" asp-page-handler="Remove" asp-route-itemID="@item.ID">Remove</button>
+                        </td>
+
+
+                        <td>@item.Quantity</td>
+
+
+                        <td>@subtotal.ToString("C")</td>
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+@*    <div class="Total">Total = @Model.Total.ToString("C")</div>
+*@
+</form>
+
+
+
+@*<form class="stripe-button" asp-page-handler="Charge" asp-route-amount="@Model.AmountPayable" method="post">
+    <script src="//checkout.stripe.com/v2/checkout.js"
+            class="stripe-button"
+            data-key="@Stripe.Value.PublishableKey"
+            data-description="CO5227 Menu Item Charge"
+            data-amount="@Model.AmountPayable"
+            data-currency="GBP">
+    </script>*@
+    @*<script>
+            document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+        </script>
+        <button type="submit" class="StripeButton">Buy</button>*@
+@*</form>*@

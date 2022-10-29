@@ -1,0 +1,36 @@
+﻿@page "{id:int}"
+@model BuildR_V_1.Pages.Admin.EditModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "/Pages/_Layout.cshtml";
+}
+
+<div class="title-container">
+    <h2 class="title-page">Edit</h2>
+</div>
+
+<form class="making-content-form" method="post" enctype="multipart/form-data">
+
+    <div asp-validation-summary="All"></div>
+
+    <label>Menu Item Name:  @Model.Item.Name</label>
+    <input class="content-input" asp-for="Item.Name" />
+
+    <label>Price: </label>
+    <input class="content-input" asp-for="Item.Money" />
+
+    <label>Description: </label>
+    <input class="content-input" asp-for="Item.Description" />
+
+    
+
+    <input asp-for="Item.ID" type="hidden" />
+
+    <input asp-for="Item.Active" type="hidden" />
+
+    
+
+    <div>
+        <button id="submit-button" type="submit" asp-page-handler="Save">Save</button>
+    </div>
+</form>

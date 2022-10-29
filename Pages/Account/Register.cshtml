@@ -1,0 +1,31 @@
+﻿@page
+@model BuildR_V_1.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "/Pages/_Layout.cshtml";
+
+}
+<div class="title-container">
+    <h2 class="title-page">Register</h2>
+</div>
+<form class="making-content-form" method="post">
+    <h4>Create an account.</h4>
+
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label asp-for="Input.Email"></label>
+        <input class="content-input" asp-for="Input.Email" />
+        <span asp-validation-for="Input.Email"></span>
+    </div>
+    <div>
+        <label asp-for="Input.Password"></label>
+        <input class="content-input" asp-for="Input.Password" />
+        <span asp-validation-for="Input.Password"></span>
+    </div>
+    <div>
+        <label asp-for="Input.ConfirmPassword"></label>
+        <input class="content-input" asp-for="Input.ConfirmPassword" />
+        <span asp-validation-for="Input.ConfirmPassword"></span>
+    </div>
+    <button id="submit-button" type="submit">Register</button>
+</form>
