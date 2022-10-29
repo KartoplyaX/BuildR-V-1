@@ -1,0 +1,57 @@
+﻿@page
+@model BuildR_V_1.Pages.Employee_Admin_Model
+@{
+    ViewData["Title"] = "Employee";
+    Layout = "/Pages/_Layout.cshtml";
+}
+
+<form method="post">
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Money</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Bildr in Model.BuildR)
+        {
+        <tr>
+            <td>@Bildr.Name</td>
+            <td>@Bildr.Description</td>
+            <td>@Bildr.Money.ToString("C")</td>
+            @{
+                try
+                {
+                    if (Convert.ToBase64String(Bildr.ImageData) != null)
+                    {
+                        <td>
+                            <img src="@string.Format("data:image/jpg;base64,{0}",
+                                    Convert.ToBase64String(Bildr.ImageData))"
+                                 alt="@Bildr.ImageDescription" />
+                        </td>
+                    }
+
+                }
+                catch
+                {
+                    <td class="Menu-Image-Boundry">
+                        <img class="Menu-Image" src="/IMG/empty file.png" alt="No Image Provided" />
+                    </td>
+                }
+            }
+            <td>
+                <button type="submit" asp-page="/Admin/Edit" asp-route-id="@Bildr.ID">Edit</button>
+                <button type="submit" asp-page-handler="Delete" asp-route-itemID="@Bildr.ID">Delete</button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Search</h2>
+    <div>Search <input asp-for="Search" /></div>
+    <button type="submit" asp-page-handler="Search">Submit</button>
+</form>

@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Identity
+@using BuildR_V_1.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+
+    <header class="header">
+        <nav>
+            <ul class="menu">
+                <li class="logo"><a lang="ja" dir="rtl" asp-page="/Index">BuildR</a></li>
+                <li class="item"><a asp-page="/Index">Home</a></li>
+                <li class="item"><a asp-page="/Employee(stock)">Employee</a></li>
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        <li class="item-hide"><a asp-page="/Contact">Contact</a></li>
+                    }
+                    else
+                    {
+                        <li class="item"><a asp-page="/Contact">Contact</a></li>
+                    }
+
+                }
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        <li class="item"><a asp-page="/Admin/UserFeedback">Feedbacks</a></li>
+                        <li class="item"><a asp-page="/Admin/Stock">Stock</a></li>
+                        <li class="item"><a asp-page="/Admin/Create">Create</a></li>
+                    }
+                }
+                else
+                {
+                    <li class="item button "><a asp-page="/Account/Login">Log in</a></li>
+                    <li class="item button "><a asp-page="/Account/Register">Register</a></li>
+                }
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        <li class="item-hide"><a asp-page="/Checkout">Checkout</a></li>
+                    }
+                    else
+                    {
+                        <li class="item"><a asp-page="/Checkout">Checkout</a></li>
+                    }
+
+
+                    <li class="item button secondary">
+                        <form asp-page="/Account/Logout" method="post">
+                            <button class="Logout" type="submit">Logout</button>
+                        </form>
+                    </li>
+
+                }
+
+                <li class="toggle"><span class="Bars"></span></li>
+
+
+            </ul>
+        </nav>
+    </header>
+
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

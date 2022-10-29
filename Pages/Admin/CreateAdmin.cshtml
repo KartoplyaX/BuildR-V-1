@@ -1,0 +1,36 @@
+﻿@page
+@model BuildR_V_1.Pages.Admin.CreateAdminModel
+@{
+    ViewData["Title"] = "CreateAdmin";
+    Layout = "/Pages/_Layout.cshtml";
+}
+<h1>Create [ Admin ]</h1>
+<p>Enter details of the Worker/HomeOwner: </p>
+
+
+<form class="making-content-form" method="post" enctype="multipart/form-data">
+
+    <label>Enter details of the Food Item: </label>
+
+    <div asp-validation-summary="All"></div>
+
+    <label>Name: </label>
+    <input class="content-input" asp-for="Bildr.Name" />
+
+    <label>Price: </label>
+    <input class="content-input" asp-for="Bildr.Money" />
+    <span asp-validation-for="Bildr.Money">
+    </span>
+
+    <label>Description: </label>
+    <input class="content-input" asp-for="Bildr.Description" />
+
+    <br />
+    <input class="image-upload" asp-for="Bildr.ImageData" type="file" id="file1" name="file1" multiple="multiple" />
+
+    <label>Image Description</label>
+    <input class="content-input" asp-for="Bildr.Description">
+
+    <input id="submit-button" type="submit" />
+
+</form>
